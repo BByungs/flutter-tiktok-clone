@@ -1,0 +1,40 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "clone",
+      "request": "launch",
+      "type": "dart"
+    },
+    {
+      "name": "Android (Pixel 9 Pro)",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "debug",
+      "deviceId": "emulator-5554"
+    },
+    {
+      "name": "ios (iPhone 16 Pro)",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "debug",
+      "deviceId": "071D22A7-3A80-427A-9DCE-451EBE889963"
+    },
+    {
+      "name": "ios (iPhone SE 3rd generation)",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "debug",
+      "deviceId": "2660B709-C3BB-4BF3-AFFA-EE884E0FD846"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "android , ios",
+      "configurations": ["Android (Pixel 9 Pro)", "ios (iPhone 16 Pro)"]
+    }
+  ]
+}
