@@ -1,4 +1,6 @@
+import 'package:clone/constants/gaps.dart';
 import 'package:clone/constants/sizes.dart';
+import 'package:clone/features/videos/widgets/video_button.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:video_player/video_player.dart';
@@ -32,8 +34,7 @@ class VideoPost extends StatefulWidget {
  */
 class _VideoPostState extends State<VideoPost>
     with SingleTickerProviderStateMixin {
-  final VideoPlayerController _videoPlayerController =
-      VideoPlayerController.asset('assets/videos/ha_nyang.mp4');
+  late final VideoPlayerController _videoPlayerController;
 
   bool _isPaused = false;
 
@@ -54,10 +55,13 @@ class _VideoPostState extends State<VideoPost>
   }
 
   void _initVideoPlayer() async {
+    _videoPlayerController =
+        VideoPlayerController.asset("assets/videos/ha_nyang.mp4");
     await _videoPlayerController.initialize();
-    // _videoPlayerController.play();
-    setState(() {});
+    // 비디오 반복 재생
+    await _videoPlayerController.setLooping(true);
     _videoPlayerController.addListener(_onVideoChange);
+    setState(() {});
   }
 
   @override
@@ -157,6 +161,63 @@ class _VideoPostState extends State<VideoPost>
                   ),
                 ),
               ),
+            ),
+          ),
+          Positioned(
+            bottom: 20,
+            left: 10,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  '@Ha_nayng',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: Sizes.size20,
+                  ),
+                ),
+                Gaps.v10,
+                Text(
+                  "This is my house in Thailand!!!",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: Sizes.size16,
+                  ),
+                )
+              ],
+            ),
+          ),
+          Positioned(
+            bottom: 20,
+            right: 10,
+            child: Column(
+              children: [
+                CircleAvatar(
+                  radius: 25,
+                  backgroundColor: Colors.black,
+                  foregroundColor: Colors.white,
+                  foregroundImage: NetworkImage(
+                    "https://upload2.inven.co.kr/upload/2017/08/11/bbs/i13479664711.jpg?MW=800",
+                  ),
+                  child: Text('하냥'),
+                ),
+                Gaps.v24,
+                VideoButton(
+                  icon: FontAwesomeIcons.solidHeart,
+                  text: "2.9M",
+                ),
+                Gaps.v24,
+                VideoButton(
+                  icon: FontAwesomeIcons.solidComment,
+                  text: "33K",
+                ),
+                Gaps.v24,
+                VideoButton(
+                  icon: FontAwesomeIcons.share,
+                  text: "Share",
+                ),
+              ],
             ),
           )
         ],
