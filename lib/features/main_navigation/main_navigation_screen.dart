@@ -1,7 +1,7 @@
 import 'package:clone/constants/gaps.dart';
-import 'package:clone/features/main_navigation/stf_screen.dart';
 import 'package:clone/features/main_navigation/widgets/nav_tab.dart';
 import 'package:clone/features/main_navigation/widgets/post_video_button.dart';
+import 'package:clone/features/videos/video_timeline.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -44,22 +44,22 @@ class _MainNavigationState extends State<MainNavigation> {
           Offstage(
             // _selectedIndex가 0이 아니라면 숨김
             offstage: _selectedIndex != 0,
-            child: StfScreen(),
+            child: VideoTimelineScreen(),
           ),
           Offstage(
             // _selectedIndex가 1이 아니라면 숨김
             offstage: _selectedIndex != 1,
-            child: StfScreen(),
+            child: Container(),
           ),
           Offstage(
             // _selectedIndex가 3이 아니라면 숨김
             offstage: _selectedIndex != 3,
-            child: StfScreen(),
+            child: Container(),
           ),
           Offstage(
             // _selectedIndex가 4가 아니라면 숨김
             offstage: _selectedIndex != 4,
-            child: StfScreen(),
+            child: Container(),
           ),
         ],
       ),
