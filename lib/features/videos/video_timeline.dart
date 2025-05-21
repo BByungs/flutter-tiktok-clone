@@ -10,6 +10,8 @@ class VideoTimelineScreen extends StatefulWidget {
 class _VideoTimelineScreenState extends State<VideoTimelineScreen> {
   int _itemCount = 4;
 
+  final PageController _pageController = PageController();
+
   List<Color> colors = [
     Colors.blue,
     Colors.red,
@@ -18,6 +20,11 @@ class _VideoTimelineScreenState extends State<VideoTimelineScreen> {
   ];
 
   void _onPageChanged(int page) {
+    _pageController.animateToPage(
+      page,
+      duration: Duration(milliseconds: 150),
+      curve: Curves.linear,
+    );
     if (page == _itemCount - 1) {
       _itemCount = _itemCount + 4;
       colors.addAll([
@@ -35,8 +42,10 @@ class _VideoTimelineScreenState extends State<VideoTimelineScreen> {
     return PageView.builder(
       // scroll 방향 설정
       scrollDirection: Axis.vertical,
+      // itemCount list의 배열의 길이만큼 꼭 지정해줘야함
       itemCount: colors.length,
       onPageChanged: _onPageChanged,
+      controller: _pageController,
       itemBuilder: (context, index) {
         return Container(
           color: colors[index],
