@@ -1,3 +1,4 @@
+import 'package:clone/features/videos/widgets/video_post.dart';
 import 'package:flutter/material.dart';
 
 class VideoTimelineScreen extends StatefulWidget {
@@ -11,30 +12,32 @@ class _VideoTimelineScreenState extends State<VideoTimelineScreen> {
   int _itemCount = 4;
 
   final PageController _pageController = PageController();
-
-  List<Color> colors = [
-    Colors.blue,
-    Colors.red,
-    Colors.yellow,
-    Colors.teal,
-  ];
+  final _scrollDuration = const Duration(milliseconds: 250);
+  final _scrollCurve = Curves.linear;
 
   void _onPageChanged(int page) {
     _pageController.animateToPage(
       page,
-      duration: Duration(milliseconds: 150),
-      curve: Curves.linear,
+      duration: _scrollDuration,
+      curve: _scrollCurve,
     );
     if (page == _itemCount - 1) {
       _itemCount = _itemCount + 4;
-      colors.addAll([
-        Colors.blue,
-        Colors.red,
-        Colors.yellow,
-        Colors.teal,
-      ]);
       setState(() {});
     }
+  }
+
+  void _onVideoFinished() {
+    _pageController.nextPage(
+      duration: _scrollDuration,
+      curve: _scrollCurve,
+    );
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
   }
 
   @override
@@ -43,22 +46,13 @@ class _VideoTimelineScreenState extends State<VideoTimelineScreen> {
       // scroll 방향 설정
       scrollDirection: Axis.vertical,
       // itemCount list의 배열의 길이만큼 꼭 지정해줘야함
-      itemCount: colors.length,
+      itemCount: _itemCount,
       onPageChanged: _onPageChanged,
       controller: _pageController,
-      itemBuilder: (context, index) {
-        return Container(
-          color: colors[index],
-          child: Center(
-            child: Text(
-              'Screen $index',
-              style: TextStyle(
-                fontSize: 68,
-              ),
-            ),
-          ),
-        );
-      },
+
+      itemBuilder: (context, index) => VideoPost(
+        onVideoFinished: _onVideoFinished,
+      ),
     );
   }
 }
