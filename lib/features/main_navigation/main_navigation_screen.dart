@@ -1,5 +1,7 @@
+import 'package:clone/constants/gaps.dart';
 import 'package:clone/features/main_navigation/stf_screen.dart';
 import 'package:clone/features/main_navigation/widgets/nav_tab.dart';
+import 'package:clone/features/main_navigation/widgets/post_video_button.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -17,6 +19,19 @@ class _MainNavigationState extends State<MainNavigation> {
     setState(() {
       _selectedIndex = index;
     });
+  }
+
+  void _onPostVideoButtonTap() {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => Scaffold(
+          appBar: AppBar(
+            title: Text('Record video'),
+          ),
+        ),
+        fullscreenDialog: true,
+      ),
+    );
   }
 
   @override
@@ -52,6 +67,7 @@ class _MainNavigationState extends State<MainNavigation> {
         color: Colors.black,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             NavTab(
               text: 'Home',
@@ -67,6 +83,12 @@ class _MainNavigationState extends State<MainNavigation> {
               onTap: () => _onTap(1),
               selectedIcon: FontAwesomeIcons.solidCompass,
             ),
+            Gaps.h24,
+            GestureDetector(
+              onTap: _onPostVideoButtonTap,
+              child: PostVideoButton(),
+            ),
+            Gaps.h24,
             NavTab(
               text: 'Inbox',
               isSelected: _selectedIndex == 3,
