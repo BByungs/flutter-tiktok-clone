@@ -38,37 +38,28 @@ class _MainNavigationState extends State<MainNavigation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: screens[_selectedIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        onTap: _onTap,
-        currentIndex: _selectedIndex,
-        selectedItemColor: Theme.of(context).primaryColor,
-        type: BottomNavigationBarType.shifting,
-        items: [
-          BottomNavigationBarItem(
-            icon: FaIcon(FontAwesomeIcons.house),
-            label: "Home",
-            backgroundColor: Colors.amber,
-          ),
-          BottomNavigationBarItem(
-            icon: FaIcon(FontAwesomeIcons.magnifyingGlass),
-            label: 'Search',
-            backgroundColor: Colors.blue,
-          ),
-          BottomNavigationBarItem(
-            icon: FaIcon(FontAwesomeIcons.magnifyingGlass),
-            label: 'Search',
-          ),
-          BottomNavigationBarItem(
-            icon: FaIcon(FontAwesomeIcons.magnifyingGlass),
-            label: 'Search',
-          ),
-          BottomNavigationBarItem(
-            icon: FaIcon(FontAwesomeIcons.magnifyingGlass),
-            label: 'Search',
-          ),
-        ],
-      ),
-    );
+        body: screens[_selectedIndex],
+        // material design 3 navigation bar
+        bottomNavigationBar: NavigationBar(
+          selectedIndex: _selectedIndex,
+          onDestinationSelected: _onTap,
+          labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+          destinations: [
+            NavigationDestination(
+              icon: FaIcon(
+                FontAwesomeIcons.house,
+                color: Colors.white,
+              ),
+              label: 'Home',
+            ),
+            NavigationDestination(
+              icon: FaIcon(
+                FontAwesomeIcons.magnifyingGlass,
+                color: Colors.white,
+              ),
+              label: 'Search',
+            ),
+          ],
+        ));
   }
 }
