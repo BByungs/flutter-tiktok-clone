@@ -37,6 +37,7 @@ class _MainNavigationState extends State<MainNavigation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: _selectedIndex == 0 ? Colors.black : Colors.white,
       body: Stack(
         children: [
           // 비 활성화 된 tab은 보이지 않게끔만 처리하는 navigation 방식
