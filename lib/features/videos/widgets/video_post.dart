@@ -18,6 +18,18 @@ class VideoPost extends StatefulWidget {
   State<VideoPost> createState() => _VideoPostState();
 }
 
+// ignore: slash_for_doc_comments
+/**
+ * SingleTickerProviderStateMixin
+ * 위젯이 화면에 보일때만 tick하는 Ticker를 제공한다
+ * Ticker는 current tree가 활성화 될 때, 달리 말하면 위젯이 화면에 보일 때만 tick 하는것임
+ * 
+ * Ticker
+ * 매 프레임마다 callback을 호출한다(부드러운 애니메이션일수록 프레임마다 animate 돼야 함)
+ * 엄청나게 무거운 애니메이션이 계속 살아있으면 메모리 누수가 발생 할 수 있으니 SingleTickerProviderStateMixin을 사용하는것임
+ * 
+ * 정리: 정신나간 애니메이션의 매 프레임마다 실행되는 Ticker가 있는데, 대신 위젯이 화면에 보일때만(current tree가 활성화 될때) 실행되는 Ticker를 제공해줌
+ */
 class _VideoPostState extends State<VideoPost>
     with SingleTickerProviderStateMixin {
   final VideoPlayerController _videoPlayerController =
