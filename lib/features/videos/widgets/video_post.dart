@@ -66,12 +66,6 @@ class _VideoPostState extends State<VideoPost>
       upperBound: 1.5,
       duration: _animationDuration,
     );
-
-    _animationController.addListener(() {
-      // print(_animationController.value);
-      // 애니메이션 진행중에 value값이 지속적으로 변하게 되는데, 이 변경된 값을 UI에 반영하기 위해서는 위젯을 다시 그려야 하기때문에 이곳에서 setState를 호출함
-      setState(() {});
-    });
   }
 
   @override
@@ -127,8 +121,19 @@ class _VideoPostState extends State<VideoPost>
             // 해당 child에 있는 widget의 이벤트를 무시함으로써 _onTogglePause를 실행할 수 있게 함
             child: IgnorePointer(
               child: Center(
-                child: Transform.scale(
-                  scale: _animationController.value,
+                // initState에서 초기화한 _animationController를 사용하고, setState를 호출하여 빌드를 시킬 필요가 없음
+                // 1. initState에서 eventlistener를 추가하여 setState를 호출하여 애니메이션 동작하는 방식
+                // 2. AnimatedBuilder를 사용하여 애니메이션 동작하는 방식
+                // 둘 중 하나 선택해서 사용하면 된다.
+                child: AnimatedBuilder(
+                  animation: _animationController,
+                  // _animationController.value가 변할 때마다 실행 됨
+                  builder: (context, child) {
+                    return Transform.scale(
+                      scale: _animationController.value,
+                      child: child,
+                    );
+                  },
                   child: AnimatedOpacity(
                     opacity: _isPaused ? 1 : 0,
                     duration: _animationDuration,
