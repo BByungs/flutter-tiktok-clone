@@ -13,30 +13,6 @@ class MainNavigation extends StatefulWidget {
 class _MainNavigationState extends State<MainNavigation> {
   int _selectedIndex = 0;
 
-  final screens = [
-    // 각자 key를 부여하면 각 화면을 서로 다른 widget인것처럼 렌더링 함
-    StfScreen(key: GlobalKey()),
-    StfScreen(key: GlobalKey()),
-    Container(),
-    StfScreen(key: GlobalKey()),
-    StfScreen(key: GlobalKey()),
-    // Center(
-    //   child: Text('Home'),
-    // ),
-    // Center(
-    //   child: Text('Search'),
-    // ),
-    // Center(
-    //   child: Text('Search'),
-    // ),
-    // Center(
-    //   child: Text('Search'),
-    // ),
-    // Center(
-    //   child: Text('Search'),
-    // ),
-  ];
-
   void _onTap(int index) {
     setState(() {
       _selectedIndex = index;
@@ -46,8 +22,32 @@ class _MainNavigationState extends State<MainNavigation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // body: screens[_selectedIndex],
-      body: screens.elementAt(_selectedIndex),
+      body: Stack(
+        children: [
+          // 비 활성화 된 tab은 보이지 않게끔만 처리하는 navigation 방식
+          // state가 다른 tab갔다와도 그대로 유지되어 있음.
+          Offstage(
+            // _selectedIndex가 0이 아니라면 숨김
+            offstage: _selectedIndex != 0,
+            child: StfScreen(),
+          ),
+          Offstage(
+            // _selectedIndex가 1이 아니라면 숨김
+            offstage: _selectedIndex != 1,
+            child: StfScreen(),
+          ),
+          Offstage(
+            // _selectedIndex가 3이 아니라면 숨김
+            offstage: _selectedIndex != 3,
+            child: StfScreen(),
+          ),
+          Offstage(
+            // _selectedIndex가 4가 아니라면 숨김
+            offstage: _selectedIndex != 4,
+            child: StfScreen(),
+          ),
+        ],
+      ),
       bottomNavigationBar: BottomAppBar(
         color: Colors.black,
         child: Row(
